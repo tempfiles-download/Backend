@@ -1,0 +1,8 @@
+name = "tempfiles-js"
+main = "src/router.js"
+compatibility_date = "2022-08-29"
+workers_dev = true
+compatibility_flags = ["streams_enable_constructors"]
+kv_namespaces = [
+{ binding = "KV_DATA", id = "9c5a22e244004f69b1c869742826b475", preview_id = "e525013dc88442a3a9ce6bf568ae9d39" }
+]

@@ -1,0 +1,19 @@
+{
+  "name": "tempfiles-js",
+  "version": "0.0.0",
+  "devDependencies": {
+    "wrangler": "2.0.27"
+  },
+  "private": true,
+  "scripts": {
+    "start": "wrangler dev",
+    "deploy": "wrangler publish"
+  },
+  "dependencies": {
+    "base64-arraybuffer": "^1.0.2",
+    "crypto-random-string": "^5.0.0",
+    "encrypt-workers-kv": "^0.0.3",
+    "itty-router": "^2.6.1",
+    "random-int": "^3.0.0"
+  }
+}
