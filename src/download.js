@@ -2,16 +2,16 @@ import {decode} from "base64-arraybuffer";
 import {getDecryptedKV} from "encrypt-workers-kv";
 
 export function download(request) {
-    return handleRequest()
+    return handleRequest(request)
 }
 
 async function handleRequest(request) {
     try {
-        const { params } = request;
-        const id = params.id;
-        const password = params.password;
+        const {params} = request;
+        const {id, password} = params;
         let decryptedData = await getDecryptedKV(KV_DATA, id, password)
         let strDecryptedData = new TextDecoder().decode(decode(new TextDecoder().decode(decryptedData)));
+        console.log(decryptedData);
         let file = JSON.parse(strDecryptedData)
         return new Response(decode(file.data), {
             headers: {
