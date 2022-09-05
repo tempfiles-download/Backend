@@ -18,7 +18,10 @@ async function handleRequest(request) {
     const password = await cryptoRandomStringAsync({length: randomInteger(6, 20), type: 'alphanumeric'});
     const del_password = await cryptoRandomStringAsync({length: randomInteger(12, 32), type: 'alphanumeric'});
     try {
-        await putEncryptedKV(KV_DATA, id, encode(dataBinary), password, 10001, {expirationTtl: 86400, metadata: {del_password: del_password}})
+        await putEncryptedKV(KV_DATA, id, encode(dataBinary), password, 10001, {
+            expirationTtl: 86400,
+            metadata: {del_password: del_password}
+        })
         return new Response(JSON.stringify({
             password: password,
             url: `${base}/${id}/${password}`,
@@ -27,7 +30,9 @@ async function handleRequest(request) {
         }, null, 2), {
             status: 201,
             headers: {
-                'Content-Type': 'Application/JSON'
+                'Content-Type': 'Application/JSON',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,DELETE'
             }
         })
     } catch (e) {
