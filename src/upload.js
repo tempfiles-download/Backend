@@ -7,8 +7,6 @@ export function upload(request) {
     return handleRequest(request)
 }
 
-const base = 'https://api3.tempfiles.download';
-
 async function handleRequest(request) {
     let formData = await request.formData();
     const file = formData.get('file');
@@ -24,7 +22,7 @@ async function handleRequest(request) {
         })
         return new Response(JSON.stringify({
             password: password,
-            url: `${base}/${id}/${password}`,
+            url: `${download_fqdn}/${id}/${password}`,
             id: id,
             deletepassword: del_password
         }, null, 2), {

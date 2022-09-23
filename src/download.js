@@ -11,7 +11,6 @@ async function handleRequest(request) {
         const {id, password} = params;
         let decryptedData = await getDecryptedKV(KV_DATA, id, password)
         let strDecryptedData = new TextDecoder().decode(decode(new TextDecoder().decode(decryptedData)));
-        console.log(decryptedData);
         let file = JSON.parse(strDecryptedData)
         return new Response(decode(file.data), {
             headers: {
