@@ -9,10 +9,6 @@ router.post("/", (request) => upload(request))
 router.get("/:id/:password", (request) => download(request))
 router.delete("/:id/:password", (request) => remove(request))
 
-/* Old routing schema */
-
-router.post("/upload/", (request) => upload(request))
-
 /* Default route */
 router.all("*", () => new Response("File not found", {status: 404}))
 
