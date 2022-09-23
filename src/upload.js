@@ -17,7 +17,7 @@ async function handleRequest(request) {
     const del_password = await cryptoRandomStringAsync({length: randomInteger(12, 32), type: 'alphanumeric'});
     try {
         await putEncryptedKV(KV_DATA, id, encode(dataBinary), password, 10001, {
-            expirationTtl: 86400,
+            expirationTtl: file_expiration,
             metadata: {del_password: del_password}
         })
         return new Response(JSON.stringify({
