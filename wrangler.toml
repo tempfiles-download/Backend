@@ -7,5 +7,6 @@ kv_namespaces = [
     { binding = "KV_DATA", id = "9c5a22e244004f69b1c869742826b475", preview_id = "e525013dc88442a3a9ce6bf568ae9d39" }
 ]
 [vars]
-download_fqdn = "https://d3.tempfiles.download"
+download_fqdn = "https://d.tempfiles.download"
 file_expiration = 86400
+server_ID = 3

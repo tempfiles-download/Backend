@@ -10,10 +10,11 @@ export function upload(request) {
 async function handleRequest(request) {
     let formData = await request.formData();
     const file = formData.get('file');
-    const id = `D3${(await cryptoRandomStringAsync({length: 12})).toUpperCase()}`
+    const id = `D${server_ID}${(await cryptoRandomStringAsync({length: 12})).toUpperCase()}`
     const data = {name: file.name, type: file.type, size: file.size, data: encode(await file.arrayBuffer())};
     const dataBinary = new TextEncoder().encode(JSON.stringify(data));
-    const password = await cryptoRandomStringAsync({length: randomInteger(6, 20), type: 'alphanumeric'});
+    const {searchParams} = new URL(request.url)
+    const password = searchParams.get('p') ? searchParams.get('p') : (await cryptoRandomStringAsync({length: randomInteger(6, 20), type: 'alphanumeric'}));
     const del_password = await cryptoRandomStringAsync({length: randomInteger(12, 32), type: 'alphanumeric'});
     try {
         await putEncryptedKV(KV_DATA, id, encode(dataBinary), password, 10001, {
@@ -21,8 +22,8 @@ async function handleRequest(request) {
             metadata: {del_password: del_password}
         })
         return new Response(JSON.stringify({
-            password: password,
             url: `${download_fqdn}/${id}/${password}`,
+            password: password,
             id: id,
             deletepassword: del_password
         }, null, 2), {
