@@ -1,9 +1,4 @@
-export function remove(request) {
-    return handleRequest(request);
-}
-
-async function handleRequest(request) {
-    const {params} = request;
+export async function remove({params}) {
     const {id, password} = params;
     const file = await R2.get(id)
     if (file) {

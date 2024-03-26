@@ -20,5 +20,5 @@ router.all("*", () => new Response(JSON.stringify({error: "Unexpected method or 
 }))
 
 addEventListener('fetch', event =>
-  event.respondWith(router.handle(event.request, event.env))
+  event.respondWith(router.handle(event.request))
 )

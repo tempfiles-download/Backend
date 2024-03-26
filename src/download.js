@@ -1,11 +1,7 @@
 import {decode} from "base64-arraybuffer";
 import {decryptData} from "./encryption";
 
-export function download({params}) {
-    return handleRequest(params)
-}
-
-async function handleRequest(params) {
+export async function download({params}) {
     try {
         const {id, password} = params;
         const data = await R2.get(id)
