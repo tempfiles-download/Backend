@@ -5,17 +5,16 @@ export function remove(request) {
 async function handleRequest(request) {
     const {params} = request;
     const {id, password} = params;
-
-    const {metadata} = await KV_DATA.getWithMetadata(id);
-    if (metadata !== null) {
-        if ('del_password' in metadata) {
-            if (metadata.del_password === password) {
-                await KV_DATA.delete(id);
+    const file = await R2.get(id)
+    if (file) {
+        const {deletion} = file.customMetadata
+        if (deletion === password) {
+            await R2.delete(id);
                 return new Response('File removed');
             }
-        } else {
-            return new Response('No deletion password set for that file', {status: 400})
-        }
     }
-    return new Response('Wrong ID or Deletion Password', {status: 404})
+    return new Response(JSON.stringify({error: 'Wrong ID or Deletion Password'}), {
+        status: 404,
+        headers: {'content-type': 'application/json'}
+    })
 }

@@ -3,10 +3,13 @@ main = "src/router.js"
 compatibility_date = "2022-08-29"
 workers_dev = true
 compatibility_flags = ["streams_enable_constructors"]
-kv_namespaces = [
-    { binding = "KV_DATA", id = "9c5a22e244004f69b1c869742826b475", preview_id = "e525013dc88442a3a9ce6bf568ae9d39" }
-]
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "tempfiles"
+preview_bucket_name = "tempfiles-preview"
+
 [vars]
-download_fqdn = "https://d.tempfiles.download"
+download_fqdn = "https://tmpfil.es"
 file_expiration = 86400
-server_ID = 3
+server_ID = 1
