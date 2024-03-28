@@ -9,6 +9,10 @@ router.post("/", (request) => upload(request))
 router.get("/:id/:password", (request) => download(request))
 router.delete("/:id/:password", (request) => remove(request))
 
+router.options("/D*", () => new Response(null, {status: 204, headers: {
+    'Access-Control-Allow-Methods': 'GET,DELETE,OPTIONS',
+    'Access-Control-Allow-Origin': '*',
+  }}))
 /* Error handling */
 router.all('/D*/', () => new Response(JSON.stringify({error: 'No password received'}), {
   status: 400,
