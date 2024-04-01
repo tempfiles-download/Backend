@@ -1,5 +1,5 @@
-import {decode} from "base64-arraybuffer";
 import {decryptData} from "./encryption";
+import {decode} from "base64-arraybuffer";
 
 export async function download({params}) {
     try {
@@ -11,13 +11,13 @@ export async function download({params}) {
             e.code = 404
             throw e
         }
-
-        const decryptedData = await decryptData(await data.text(), password)
-        let file = JSON.parse(atob(decryptedData))
+        const encryptedData = await data.text()
+        const decryptedData = await decryptData(encryptedData, password)
+        const file = JSON.parse(decryptedData)
         return new Response(decode(file.data), {
             headers: {
                 'Content-Description': 'File Transfer',
-                'content-type': `${file.type}; charset=utf-8`,
+                'content-type': `${file.type}`,
                 'Content-Disposition': `inline; filename="${file.name}"`,
                 'Content-Length': `${file.size}`,
                 'etag': `${data.httpEtag}`

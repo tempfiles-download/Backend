@@ -5,7 +5,7 @@ import {remove} from "./remove";
 
 const router = Router()
 
-router.post("/", (request) => upload(request))
+router.post("/", async (request) => await upload(request))
 router.get("/:id/:password", (request) => download(request))
 router.delete("/:id/:password", (request) => remove(request))
 
